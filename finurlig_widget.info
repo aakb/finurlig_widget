@@ -1,0 +1,5 @@
+name = Finurlige fakta widget
+description = Provides a block to insert widget code from http://finurligefakta.dk
+core = 6.x
+package = Other
+php = 5.2

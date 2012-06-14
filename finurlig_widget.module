@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * This module provides an configureable interface to finurligefakta.dk, which
+ * can be used to insert an widget on the site in the form of a block. The 
+ * widget is implemented as JavaScript.
+ * 
+ * The 1.0 version is not configureable.  
+ */
+
+/**
+ * Implements hook_block().
+ * 
+ * Provieds simple block that loads the JavaScript, which then connectes to the
+ * web services and inserts the widget into the placeholder.
+ */
+function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks = array();
+      $blocks[0] = array(
+        'info' => 'Finurlige fakta',
+        'cache' => BLOCK_NO_CACHE,
+      );
+      return $blocks;
+      break;
+
+    case 'view':
+      $block = array(
+        'title' => '',
+        'content' => '<div id="finurlig-widget-1" class="finurlig-widget"></div>',
+      );
+      
+      // Add inline JavaScript to the page footer, which loades the widget into
+      // the block's div.
+      drupal_add_js("var fffWidgetConfig = [];
+                     fffWidgetConfig.push({
+                       'widget' : 'interactive',
+                       'target' : '#finurlig-widget-1',
+                       'style' : 'full',
+                     });
+
+                     (function() {
+                       var fff = document.createElement('script'); fff.type = 'text/javascript'; fff.async = true;
+                       fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.dk/widgets/fff.widget.js';
+                       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fff, s);
+                     })();", 'inline', 'footer');      
+      return $block;
+      break;        
+  }
+}
