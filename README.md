@@ -1,4 +1,3 @@
-finurlig_widget
-===============
+This branch is empty, look into the version branches.
 
-Drupal module to display widgets from finurligfakta.dk
+This is a Drupal module to display Finurligefakta.dk in a block. 
