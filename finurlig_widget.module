@@ -38,7 +38,10 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
                      fffWidgetConfig.push({
                        'widget' : 'interactive',
                        'target' : '#finurlig-widget-1',
-                       'style' : 'full',
+                       'style' : {
+                         'type' : 'full',
+                         'color' : 'orange'
+                       },
                      });
 
                      (function() {
