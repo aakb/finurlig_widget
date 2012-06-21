@@ -6,8 +6,24 @@
  * can be used to insert an widget on the site in the form of a block. The 
  * widget is implemented as JavaScript.
  * 
- * The 1.0 version is not configureable.  
  */
+
+/**
+ * Implementation of hook_menu().
+ */
+function finurlig_widget_menu() { 
+  return array(
+    'admin/settings/fffwidget' => array(
+      'title' => 'Finurlig fakta',
+      'description' => 'Configure the "Firnulig fakta" widget.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('finurlig_widget_admin_form'),
+      'access arguments' => array('administer site configuration'),
+      'file' => 'includes/finurlig_widget.admin.inc',
+    ),
+  );
+}
+
 
 /**
  * Implements hook_block().
@@ -27,28 +43,41 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
       break;
 
     case 'view':
+      // Load widget configuration.
+      $conf = variable_get('fff_widget', array());
+      $type = isset($conf['type']) ? $conf['type'] : 'interactive';
+      $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
+      $style_type = isset($conf['style']['type']) ? $conf['style']['type'] : 'full';
+      $style_color = isset($conf['style']['color']) ? $conf['style']['color'] : 'default';
+      $reload = isset($conf['optsion']['reload']) ? $conf['options']['reload'] : TRUE;
+      $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
+      
       $block = array(
-        'title' => '',
-        'content' => '<div id="finurlig-widget-1" class="finurlig-widget"></div>',
+        'title' => '<none>',
+        'content' => '<div id="' . $target . '" class="finurlig-widget"></div>',
       );
       
       // Add inline JavaScript to the page footer, which loades the widget into
       // the block's div.
       drupal_add_js("var fffWidgetConfig = [];
                      fffWidgetConfig.push({
-                       'widget' : 'interactive',
-                       'target' : '#finurlig-widget-1',
+                       'widget' : '" . $type . "',
+                       'target' : '#". $target . "',
                        'style' : {
-                         'type' : 'full',
-                         'color' : 'orange'
+                         'type' : '" . $style_type . "',
+                         'color' : '" . $style_color . "'
                        },
+                       'button' : {
+                         'reload' : " . ($reload ? 'true' : 'false') . "
+                       },
+                       'tracking' : " . ($tracking ? 'true' : 'false') . "
                      });
 
                      (function() {
                        var fff = document.createElement('script'); fff.type = 'text/javascript'; fff.async = true;
                        fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.dk/widgets/fff.widget.js';
                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fff, s);
-                     })();", 'inline', 'footer');      
+                     })();", 'inline', 'footer');
       return $block;
       break;        
   }
