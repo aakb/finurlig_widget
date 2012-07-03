@@ -13,7 +13,7 @@
  */
 function finurlig_widget_menu() {
   return array(
-    'admin/settings/fffwidget' => array(
+    'admin/config/services/fffwidget' => array(
       'title' => 'Finurlig fakta',
       'description' => 'Configure the "Firnulig fakta" widget.',
       'page callback' => 'drupal_get_form',
@@ -25,27 +25,33 @@ function finurlig_widget_menu() {
 }
 
 /**
- * Implements hook_block().
+ * Implements hook_block_info().
  *
- * Provieds simple block that loads the JavaScript, which then connectes to the
- * web services and inserts the widget into the placeholder. The block is only
- * used with the interactive widget
+ * Defines a block used to display the interactive widget.
  */
-function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
-  switch ($op) {
-    case 'list':
-      $blocks = array();
-      $blocks[0] = array(
-        'info' => 'Finurlige fakta',
-        'cache' => BLOCK_NO_CACHE,
-      );
-      return $blocks;
-      break;
+function finurlig_widget_block_info() {
+  $blocks = array();
 
-    case 'view':
+  $blocks['fffWidget'] = array(
+    'info' => 'Finurlige fakta',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * Defines the content of the block used to disaplay interactive widgets. It
+ * also adds JavaScript to load the widget to the page.
+ */
+function finurlig_widget_block_view($delta = '') {
+  switch ($delta) {
+    case 'fffWidget':
       // Load widget configuration.
       $conf = variable_get('fff_widget', array());
-      $type = isset($conf['type']) ? $conf['type'] : 'interactive';
+      $type = isset($conf['type']) ? $conf['type'] : FALSE;
 
       if ($type == 'interactive') {
         $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
@@ -55,8 +61,9 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
         $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
 
         $block = array(
-          'title' => '<none>',
-          'content' => '<div id="' . $target . '" class="finurlig-widget"></div>',
+          'subject' => '<none>',
+          'content' => array(
+            '#markup' => '<div id="' . $target . '" class="finurlig-widget"></div>'),
         );
 
         // Add inline JavaScript to the page footer, which loades the widget into
@@ -94,7 +101,7 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
  */
 function finurlig_widget_init() {
   $conf = variable_get('fff_widget', array());
-  $type = isset($conf['type']) ? $conf['type'] : 'slidein';
+  $type = isset($conf['type']) ? $conf['type'] : FALSE;
 
   if ($type == 'slidein') {
     // Load configuration
