@@ -45,7 +45,7 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
     case 'view':
       // Load widget configuration.
       $conf = variable_get('fff_widget', array());
-      $type = isset($conf['type']) ? $conf['type'] : 'interactive';
+      $type = isset($conf['type']) ? $conf['type'] : FALSE;
 
       if ($type == 'interactive') {
         $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
@@ -94,7 +94,7 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
  */
 function finurlig_widget_init() {
   $conf = variable_get('fff_widget', array());
-  $type = isset($conf['type']) ? $conf['type'] : 'slidein';
+  $type = isset($conf['type']) ? $conf['type'] : FALSE;
 
   if ($type == 'slidein') {
     // Load configuration
