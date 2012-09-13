@@ -77,7 +77,7 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
 
                       (function() {
                         var fff = document.createElement('script'); fff.type = 'text/javascript'; fff.async = true;
-                        fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.dk/widgets/fff.widget.min.js';
+                        fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.dk/widgets/fff-' + ( typeof(jQuery) == 'undefined' || parseFloat(jQuery.fn.jquery) < 1.4 ? '1.4load' : '1.4ready' ) + '.widget.min.js';
                         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fff, s);
                       })();", 'inline', 'footer');
         return $block;
