@@ -51,8 +51,8 @@ function finurlig_widget_block($op = 'list', $delta = 0, $edit = array()) {
         $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
         $style_type = isset($conf['style']['type']) ? $conf['style']['type'] : 'full';
         $style_color = isset($conf['style']['color']) ? $conf['style']['color'] : 'default';
-        $reload = isset($conf['optsion']['reload']) ? $conf['options']['reload'] : TRUE;
-        $create = isset($conf['optsion']['create']) ? $conf['options']['create'] : FALSE;
+        $reload = isset($conf['options']['reload']) ? $conf['options']['reload'] : TRUE;
+        $create = isset($conf['options']['create']) ? $conf['options']['create'] : FALSE;
         $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
 
         $block = array(
