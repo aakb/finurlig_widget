@@ -94,6 +94,14 @@ function finurlig_widget_admin_form() {
     '#default_value' => isset($default['optsion']['reload']) ? $default['options']['reload'] : TRUE,
   );
 
+  // Create fact button
+  $form['fff_widget']['options']['create'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable reload'),
+    '#description' => t('Display the create fact link.'),
+    '#default_value' => isset($default['optsion']['create']) ? $default['options']['create'] : FALSE,
+  );
+
   // GA tracking
   $form['fff_widget']['options']['tracking'] = array(
     '#type' => 'checkbox',

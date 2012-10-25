@@ -58,6 +58,7 @@ function finurlig_widget_block_view($delta = '') {
         $style_type = isset($conf['style']['type']) ? $conf['style']['type'] : 'full';
         $style_color = isset($conf['style']['color']) ? $conf['style']['color'] : 'default';
         $reload = isset($conf['optsion']['reload']) ? $conf['options']['reload'] : TRUE;
+        $create = isset($conf['optsion']['create']) ? $conf['options']['create'] : FALSE;
         $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
 
         $block = array(
@@ -77,7 +78,8 @@ function finurlig_widget_block_view($delta = '') {
                           'color' : '" . $style_color . "'
                         },
                         'button' : {
-                          'reload' : " . ($reload ? 'true' : 'false') . "
+                          'reload' : " . ($reload ? 'true' : 'false') . ",
+                          'create' : " . ($create ? 'true' : 'false') . ",
                         },
                         'tracking' : " . ($tracking ? 'true' : 'false') . "
                       });
