@@ -54,12 +54,12 @@ function finurlig_widget_block_view($delta = '') {
       $type = isset($conf['type']) ? $conf['type'] : FALSE;
 
       if ($type == 'interactive') {
-        $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
+        $target = isset($conf['options']['target']) ? $conf['options']['target'] : 'firnulig-widget';
         $style_type = isset($conf['style']['type']) ? $conf['style']['type'] : 'full';
         $style_color = isset($conf['style']['color']) ? $conf['style']['color'] : 'default';
-        $reload = isset($conf['optsion']['reload']) ? $conf['options']['reload'] : TRUE;
-        $create = isset($conf['optsion']['create']) ? $conf['options']['create'] : FALSE;
-        $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
+        $reload = isset($conf['options']['reload']) ? $conf['options']['reload'] : TRUE;
+        $create = isset($conf['options']['create']) ? $conf['options']['create'] : FALSE;
+        $tracking = isset($conf['options']['tracking']) ? $conf['options']['tracking'] : TRUE;
 
         $block = array(
           'subject' => '<none>',
@@ -107,11 +107,11 @@ function finurlig_widget_init() {
 
   if ($type == 'slidein') {
     // Load configuration
-    $target = isset($conf['optsion']['target']) ? $conf['options']['target'] : 'firnulig-widget';
+    $target = isset($conf['options']['target']) ? $conf['options']['target'] : 'firnulig-widget';
     $style_type = isset($conf['style']['type']) ? $conf['style']['type'] : 'full';
     $style_color = isset($conf['style']['color']) ? $conf['style']['color'] : 'default';
-    $reload = isset($conf['optsion']['reload']) ? $conf['options']['reload'] : TRUE;
-    $tracking = isset($conf['optsion']['tracking']) ? $conf['options']['tracking'] : TRUE;
+    $reload = isset($conf['options']['reload']) ? $conf['options']['reload'] : TRUE;
+    $tracking = isset($conf['options']['tracking']) ? $conf['options']['tracking'] : TRUE;
 
     // Add inline JavaScript to the page footer, which loades the widget.
     drupal_add_js("var fffWidgetConfig = [];

@@ -83,7 +83,7 @@ function finurlig_widget_admin_form() {
     '#type' => 'textfield',
     '#title' => t('Widget ID'),
     '#description' => t('The CSS ID to give the widget, mostly used if you want to modify default styling.'),
-    '#default_value' => isset($default['optsion']['target']) ? $default['options']['target'] : 'firnulig-widget',
+    '#default_value' => isset($default['options']['target']) ? $default['options']['target'] : 'firnulig-widget',
   );
 
   // Reload button
@@ -91,7 +91,7 @@ function finurlig_widget_admin_form() {
     '#type' => 'checkbox',
     '#title' => t('Enable reload'),
     '#description' => t('Display the reload button.'),
-    '#default_value' => isset($default['optsion']['reload']) ? $default['options']['reload'] : TRUE,
+    '#default_value' => isset($default['options']['reload']) ? $default['options']['reload'] : TRUE,
   );
 
   // Create fact button
@@ -99,7 +99,7 @@ function finurlig_widget_admin_form() {
     '#type' => 'checkbox',
     '#title' => t('Enable reload'),
     '#description' => t('Display the create fact link.'),
-    '#default_value' => isset($default['optsion']['create']) ? $default['options']['create'] : FALSE,
+    '#default_value' => isset($default['options']['create']) ? $default['options']['create'] : FALSE,
   );
 
   // GA tracking
@@ -107,7 +107,7 @@ function finurlig_widget_admin_form() {
     '#type' => 'checkbox',
     '#title' => t('Enable Google Analytics tracking'),
     '#description' => t('We recommend that you allow us to use Google Analytics to track usage of your service. This will justify the costs of running the service.'),
-    '#default_value' => isset($default['optsion']['tracking']) ? $default['options']['tracking'] : TRUE,
+    '#default_value' => isset($default['options']['tracking']) ? $default['options']['tracking'] : TRUE,
   );
 
   return system_settings_form($form);
