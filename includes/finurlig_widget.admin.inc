@@ -21,7 +21,7 @@ function finurlig_widget_admin_form() {
     'blue' => t('Blue'),
     'green' => t('Green'),
     'orange' => t('Orange'),
-    'turqouise' => t('Turquoise'),
+    'turquoise' => t('Turquoise'),
   );
 
   $default = variable_get('fff_widget', array());
